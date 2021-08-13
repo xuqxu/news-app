@@ -21,9 +21,7 @@ export default function ListItem({ imageUrl, title, auther }) {
         <Text numberOfLines={3} style={[styles.text, themeTextStyle]}>
           {title}
         </Text>
-        <Text style={styles.SubText}>
-          {auther} Color scheme: {colorScheme}
-        </Text>
+        <Text style={styles.SubText}>{auther}</Text>
       </View>
     </View>
   );
