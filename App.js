@@ -1,20 +1,15 @@
 import React from 'react';
-import { Text, StyleSheet, View, useColorScheme, Image } from 'react-native';
+import {
+  StyleSheet,
+  useColorScheme,
+  FlatList,
+  SafeAreaView,
+} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import ListItem from './components/ListItem';
-import article from './dummies/articles.json';
+import articles from './dummies/articles.json';
 
 export default function App() {
-  const items = article.map((article, index) => {
-    return (
-      <ListItem
-        imageUrl={article.urlToImage}
-        title={article.title}
-        auther={article.author}
-        key={index}
-      />
-    );
-  });
   const colorScheme = useColorScheme();
 
   const themeTextStyle =
@@ -23,18 +18,26 @@ export default function App() {
     colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
 
   return (
-    <View style={[styles.container, themeContainerStyle]}>
+    <SafeAreaView style={[styles.container, themeContainerStyle]}>
       <StatusBar style="auto" />
-      {items}
-    </View>
+      <FlatList
+        data={articles}
+        renderItem={({ item }) => (
+          <ListItem
+            imageUrl={item.urlToImage}
+            title={item.title}
+            author={item.author}
+          />
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   lightContainer: {
     backgroundColor: '#f5f5fa',
