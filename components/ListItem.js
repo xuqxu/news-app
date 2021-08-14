@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet, View, useColorScheme, Image } from 'react-native';
 
-export default function ListItem({ imageUrl, title, auther }) {
+export default function ListItem({ imageUrl, title, author }) {
   const colorScheme = useColorScheme();
 
   const themeTextStyle =
@@ -21,7 +21,7 @@ export default function ListItem({ imageUrl, title, auther }) {
         <Text numberOfLines={3} style={[styles.text, themeTextStyle]}>
           {title}
         </Text>
-        <Text style={styles.SubText}>{auther}</Text>
+        <Text style={styles.SubText}>{author}</Text>
       </View>
     </View>
   );
