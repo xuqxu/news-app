@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   useColorScheme,
@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import ListItem from './components/ListItem';
-import articles from './dummies/articles.json';
+import dummyArticles from './dummies/articles.json';
 
 export default function App() {
   const colorScheme = useColorScheme();
@@ -17,6 +17,13 @@ export default function App() {
   const themeContainerStyle =
     colorScheme === 'light' ? styles.lightContainer : styles.darkContainer;
 
+  const [articles, setArticles] = useState([]);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setArticles(dummyArticles);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <SafeAreaView style={[styles.container, themeContainerStyle]}>
       <StatusBar style="auto" />
