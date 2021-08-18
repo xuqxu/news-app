@@ -1,15 +1,18 @@
 import React from 'react';
-import { Text, StyleSheet, View, useColorScheme, Image } from 'react-native';
+import { Text, View, useColorScheme, Image } from 'react-native';
+import { globalStyles } from '../styles/global';
 
 export default function ListItem({ imageUrl, title, author }) {
   const colorScheme = useColorScheme();
 
   const themeTextStyle =
-    colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
+    colorScheme === 'light'
+      ? globalStyles.lightThemeText
+      : globalStyles.darkThemeText;
 
   return (
-    <View style={styles.itemContainer}>
-      <View style={styles.leftContainer}>
+    <View style={globalStyles.itemContainer}>
+      <View style={globalStyles.leftContainer}>
         <Image
           style={{ width: 100, height: 100 }}
           source={{
@@ -17,43 +20,12 @@ export default function ListItem({ imageUrl, title, author }) {
           }}
         />
       </View>
-      <View style={styles.rightContainer}>
-        <Text numberOfLines={3} style={[styles.text, themeTextStyle]}>
+      <View style={globalStyles.rightContainer}>
+        <Text numberOfLines={3} style={[globalStyles.text, themeTextStyle]}>
           {title}
         </Text>
-        <Text style={styles.SubText}>{author}</Text>
+        <Text style={globalStyles.SubText}>{author}</Text>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  lightThemeText: {
-    color: '#242c40',
-  },
-  darkThemeText: {
-    color: '#d0d0c0',
-  },
-  itemContainer: {
-    height: 100,
-    width: '100%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    flexDirection: 'row',
-  },
-  leftContainer: {
-    width: 100,
-  },
-  rightContainer: {
-    flex: 1,
-    padding: 10,
-    justifyContent: 'space-between',
-  },
-  text: {
-    fontSize: 16,
-  },
-  SubText: {
-    fontSize: 12,
-    color: 'gray',
-  },
-});
